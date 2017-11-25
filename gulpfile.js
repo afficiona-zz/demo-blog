@@ -54,6 +54,15 @@ gulp.task('imagemin', function () {
     .pipe(gulp.dest('./dist/assets/images'))
 });
 
+// Rewrite css url paths
+gulp.task('rewrite-css', function () {
+  return gulp.src('dist/styles/index.css').
+    pipe(cssUrlAdjuster({
+      replace:  ['./../assets/','./../img/']
+    }))
+    .pipe(gulp.dest('dist/styles/'));
+});
+
 // Script task
 gulp.task('scripts', function () {
   return gulp.src('app/scripts/**/*.js')
@@ -81,10 +90,10 @@ gulp.task('scripts-prod', function () {
 gulp.task('html-replace', function () {
   return gulp.src('app/**/*.html')
     .pipe(htmlReplace({
-      'css': 'styles/index.css',
-      'js': 'scripts/bundle.js'
+      'css': 'dist/styles/index.css',
+      'js': 'dist/scripts/bundle.js'
     }))
-    .pipe(gulp.dest('dist/'));
+    .pipe(gulp.dest(''));
 });
 
 gulp.task('watch', function () {

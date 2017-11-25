@@ -11,21 +11,16 @@
   "use strict";
   $(document).ready(function() {
     var config = {
-      noOfItemsVisible: 1
+      noOfItemsVisible: $(window).innerWidth() > 992 ? 3 : 1
     };
 
     var $slider = $('#slider');
     var $wrapper = $slider.find('.wrapper');
     var $item = $wrapper.find('.item');
 
-    //getting wrapper dimensions
-    var $wrapperDimensions = {
-      width: $wrapper.width(),
-      height: $wrapper.height()
-    };
-
-    $item.innerWidth($wrapperDimensions.width / config.noOfItemsVisible);
-    $wrapper.height($item.height());
+    $item.innerWidth($wrapper.innerWidth() / config.noOfItemsVisible);
+    //calculating the height of the wrapper as per aspect ratio of 5:4
+    $wrapper.innerHeight($item.innerWidth() * 4 / 5);
     $item.each(function (index, item) {
       $(item).css('left', (index * $(item).innerWidth()));
     });

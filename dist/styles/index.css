@@ -1980,11 +1980,11 @@ body {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   color: #ffffff;
   position: relative; }
   .hero canvas {
@@ -2015,8 +2015,8 @@ body {
       display: -ms-flexbox;
       display: flex;
       -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center; } }
+      -ms-flex-align: center;
+      align-items: center; } }
 
 @media (min-width: 992px) {
   .navbar-default .navbar-middle {
@@ -2139,8 +2139,8 @@ body {
       padding: 0 10px;
       color: #ffffff;
       -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
       margin-bottom: 10px;
       text-transform: uppercase;
       letter-spacing: 1.1px;
@@ -2165,8 +2165,8 @@ body {
       display: flex;
       font-size: 12px;
       -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center; }
+      -ms-flex-align: center;
+      align-items: center; }
       .main-content .widgets .social .each .icon {
         width: 25px;
         height: 25px;
@@ -2245,8 +2245,8 @@ body {
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   position: relative;
   margin-top: 12px; }
   .footer:before {
@@ -2287,6 +2287,11 @@ body {
     .slider .wrapper .item {
       padding: 10px;
       position: absolute; }
+      @media (max-width: 992px) {
+        .slider .wrapper .item {
+          text-align: center; }
+          .slider .wrapper .item img {
+            margin: 0 auto; } }
   .slider .action {
     position: absolute;
     top: 50%;
@@ -2298,6 +2303,6 @@ body {
     .slider .action.left {
       left: 0;
       -webkit-transform: scaleX(-1);
-              transform: scaleX(-1); }
+      transform: scaleX(-1); }
     .slider .action.right {
       right: 0; }
