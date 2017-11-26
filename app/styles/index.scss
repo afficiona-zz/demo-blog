@@ -9,6 +9,7 @@
 @import "./../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/navbar";
 @import "./../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/type";
 @import "./../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/scaffolding";
+@import "./../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap/responsive-utilities";
 
 @import "main";
 @import "hero";
@@ -31,33 +32,50 @@ body {
       }
     }
   }
+  .navbar-right {
+    > li > a {
+      padding: 11px 22px;
+    }
+  }
   .navbar-brand {
     padding: 9px 10px;
     @media (max-width: $screen-md-min) {
       width: 113px;
-      display: -webkit-box;
-      display: -ms-flexbox;
       display: flex;
-      -webkit-box-align: center;
-          -ms-flex-align: center;
-              align-items: center;
+      align-items: center;
     }
   }
   .navbar-middle {
+    a {
+      position: relative;
+      &:after {
+        content: '';
+        height: 2px;
+        background: $navbar-default-link-active-color;
+        width: 100%;
+        bottom: -1px;
+        left: 0;
+        position: absolute;
+        opacity: 0;
+        transition: .3s all;
+      }
+    }
     @media (min-width: $screen-md-min) {
-      margin-left: 150px;
+      margin-left: 110px;
+      > .active, :hover {
+        > a:after {
+          opacity: 1;
+        }
+      }
     }
   }
 }
 
 //hero
 .hero {
-  background: url('./../assets/images/hero-bg.png') no-repeat;
+  background: url('./../assets/images/banner.png') no-repeat;
   background-size: cover;
-  background-position-y: -110px;
   height: 210px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   position: relative;
   &:after {
@@ -88,8 +106,6 @@ body {
   }
   @media (max-width: $screen-md-min) {
     height: 135px;
-    background-size: 130%;
-    background-position-y: 0;
     .title {
       font-size: 14px;
       max-width: 239px;
@@ -128,20 +144,19 @@ body {
     }
   }
   .post-meta {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     .each {
       border-right: 1px solid #222;
       text-transform: uppercase;
       font-size: 10px;
       line-height: 1;
+      padding-right: 4px;
+      margin-right: 4px;
       &:last-child {
         border: none;
       }
       @media (max-width: $screen-sm-min) {
-        padding-right: 4px;
-        margin-right: 4px;
+        font-size: 8px;
       }
     }
   }
@@ -163,6 +178,23 @@ body {
         font-size: 10px;
       }
     }
+    @media (max-width: $screen-sm-min) {
+      max-width: none;
+      .header {
+        display: flex;
+        border-top: 1px solid $text-color;
+        border-bottom: 1px solid $text-color;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        margin-bottom: 20px;
+        align-items: center;
+        .avatar {
+          max-width: 50px;
+          margin-right: 10px;
+          margin-bottom: 0;
+        }
+      }
+    }
     .overview {
       .title {
         font-size: 12px;
@@ -173,6 +205,7 @@ body {
         font-size: 10px;
         margin-bottom: 10px;
         .label {
+          color: #000000;
           font-size: 12px;
           font-weight: bold;
         }
@@ -182,6 +215,9 @@ body {
 
   .article-body {
     margin-top: 64px;
+    @media (max-width: $screen-sm-min) {
+      margin-top: 12px;
+    }
     .article {
       p {
         margin-bottom: 32px;
@@ -192,70 +228,6 @@ body {
   .widgets {
     > .each {
       margin-bottom: 32px;
-      .btn {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        border-radius: 3px;
-        background: $brand-primary;
-        height: 40px;
-        padding: 0 10px;
-        color: #ffffff;
-        -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
-        margin-bottom: 10px;
-        text-transform: uppercase;
-        letter-spacing: 1.1px;
-        position: relative;
-        border: 1px solid $brand-primary;
-        &:after {
-          content: url('./../assets/images/Arrow.svg');
-          position: absolute;
-          right: 10px;
-          line-height: 1;
-        }
-        &:hover {
-          background: #ffffff;
-          color: $brand-primary;
-          &:after {
-            content: url('./../assets/images/Arrow_on_hover.svg');
-          }
-        }
-      }
-    }
-    .social {
-      margin-bottom: 64px;
-      .each {
-        margin-bottom: 16px;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        font-size: 12px;
-        -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
-        .icon {
-          width: 25px;
-          height: 25px;
-          margin-right: 12px;
-          background-size: cover;
-          &-linkedin {
-            background-image: url('./../assets/images/Linkedin.svg');
-          }
-          &-facebook {
-            background-image: url('./../assets/images/Facebook.svg');
-          }
-          &-twitter {
-            background-image: url('./../assets/images/Twitter.svg');
-          }
-        }
-        &:hover {
-          .icon {
-            background-position-x: -25px;
-          }
-        }
-      }
     }
     .events {
       .event {
@@ -269,14 +241,12 @@ body {
           font-size: 12px;
           margin: 0;
           line-height: 1.2;
+          font-weight: bold;
         }
         .links {
-          display: -webkit-box;
-          display: -ms-flexbox;
           display: flex;
           margin-top: 10px;
           .each {
-            color: $link-color;
             font-size: 10px;
             padding-right: 10px;
             margin-right: 10px;
@@ -287,6 +257,42 @@ body {
             }
           }
         }
+      }
+    }
+  }
+}
+
+//social
+.social {
+  margin-bottom: 64px;
+  @media (max-width: $screen-sm-min) {
+    display: flex;
+    margin: 17px 0 21px;
+  }
+  .each {
+    margin-bottom: 16px;
+    display: flex;
+    font-size: 12px;
+    align-items: center;
+    .icon {
+      width: 25px;
+      height: 25px;
+      margin-right: 12px;
+      background-size: cover;
+      transition: .1s all;
+      &-linkedin {
+        background-image: url('./../assets/images/Linkedin.svg');
+      }
+      &-facebook {
+        background-image: url('./../assets/images/Facebook.svg');
+      }
+      &-twitter {
+        background-image: url('./../assets/images/Twitter.svg');
+      }
+    }
+    &:hover {
+      .icon {
+        background-position-x: -25px;
       }
     }
   }
@@ -318,16 +324,33 @@ body {
     border-top: 1px solid #333;
     font-size: 12px;
   }
+
+  @media (max-width: $screen-sm-min) {
+    padding: 38px 0;
+    background-size: 159px;
+    font-size: 16px;
+    .quote {
+      padding: 20px 0 20px 20px;
+      font-size: 18px;
+    }
+  }
 }
 
 //recommendation section
 .recommendation-section {
   padding: 80px 0;
+  @media (max-width: $screen-sm-min) {
+    padding: 40px 0;
+  }
   .item-title {
     font-size: 13px;
     line-height: 1.38;
     margin-top: 16px;
   }
+}
+
+.cta-actions {
+  margin: 23px 0 43px;
 }
 
 //footer
@@ -337,12 +360,8 @@ body {
   height: 105px;
   font-size: 13px;
   letter-spacing: -0.6px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   position: relative;
   margin-top: 12px;
   &:before {
@@ -369,6 +388,39 @@ body {
   @media (max-width: $screen-md-min) {
     padding-left: 20px;
     padding-right: 20px;
+  }
+}
+
+a {
+  transition: .3s all;
+}
+
+.btn {
+  display: flex;
+  border-radius: 8px;
+  background: $brand-primary;
+  height: 40px;
+  padding: 0 15px;
+  color: #ffffff;
+  align-items: center;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+  position: relative;
+  border: 1px solid $brand-primary;
+  transition: .2s all;
+  &:after {
+    content: url('./../assets/images/Arrow.svg');
+    position: absolute;
+    right: 10px;
+    line-height: 1;
+  }
+  &:hover {
+    background: #ffffff;
+    color: $brand-primary;
+    &:after {
+      content: url('./../assets/images/Arrow_on_hover.svg');
+    }
   }
 }
 
@@ -407,10 +459,13 @@ body {
     cursor: pointer;
     background-image: url('./../assets/images/arrow-icon.svg');
     background-repeat: no-repeat;
+    &.disabled {
+      opacity: .2;
+      cursor: not-allowed;
+    }
     &.left {
       left: 0;
-      -webkit-transform: scaleX(-1);
-              transform: scaleX(-1);
+      transform: scaleX(-1);
     }
     &.right {
       right: 0;

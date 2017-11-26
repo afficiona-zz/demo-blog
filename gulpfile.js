@@ -6,6 +6,7 @@
 var gulp     = require('gulp'),
   gutil        = require('gulp-util'),
   htmlReplace  = require('gulp-html-replace'),
+  rewriteImagePath = require('gulp-rewrite-image-path'),
   sass         = require('gulp-sass'),
   autoprefixer = require('gulp-autoprefixer'),
   jshint       = require('gulp-jshint'),
@@ -33,7 +34,6 @@ gulp.task('html', function () {
 gulp.task('sass', function () {
   return gulp.src('./app/styles/**/*.scss')
     .pipe(sass())
-    .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .pipe(gulp.dest('./app/styles/'))
     .pipe(connect.reload());
 });
@@ -45,6 +45,12 @@ gulp.task('sass-prod', function () {
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .pipe(gulp.dest('./dist/styles/'))
     .pipe(connect.reload());
+});
+
+gulp.task('image-path-rewrite', ['html-replace'], function () {
+  gulp.src('index.html')
+    .pipe(rewriteImagePath({path:"dist"}))
+    .pipe(gulp.dest(''));
 });
 
 // Minify images
@@ -123,7 +129,7 @@ gulp.task('clean-build', function () {
     .pipe(clean());
 });
 
-gulp.task('build', ['clean-build', 'sass-prod', 'scripts-prod', 'imagemin', 'html-replace'], function () {
+gulp.task('build', ['clean-build', 'sass-prod', 'scripts-prod', 'imagemin', 'image-path-rewrite'], function () {
 });
 
 gulp.task('default', []);

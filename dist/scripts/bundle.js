@@ -2,11 +2,6 @@
  * Application entry point
  */
 
-// Load application styles
-// ================================
-// START YOUR APP HERE
-// ================================
-
 (function ($) {
   "use strict";
   $(document).ready(function() {
@@ -25,19 +20,45 @@
       $(item).css('left', (index * $(item).innerWidth()));
     });
 
+    _checkIfLastItem();
+
     $('.action').on('click', function() {
-      var isActionTypeLeft = $(this).hasClass('left');
-      $item.each(function () {
+      var $action = $(this);
+      var isActionTypeLeft = $action.hasClass('left');
+      //not allowing navigation if action is disbaled
+      if ($action.hasClass('disabled')) {
+        return;
+      }
+      $item.each(function (index) {
         var offset = 0;
         if (isActionTypeLeft) {
-          offset = $(this).position().left - $item.innerWidth();
-        } else {
           offset = $(this).position().left + $item.innerWidth();
+        } else {
+          offset = $(this).position().left - $item.innerWidth();
         }
-        $(this).animate({'left': offset}, 500);
+        $(this).animate({'left': offset}, 500, function () {
+          _checkIfLastItem()
+        });
 
       });
     });
+
+    //Disbale navigation if first item or last item is visible.
+    function _checkIfLastItem() {
+      var $lastItem = $item.last();
+      var $firstItem = $item.first();
+      // resetting disabled state
+      $('.action').removeClass('disabled');
+
+      // if last item
+      if (Math.floor($wrapper.innerWidth()) === Math.floor($lastItem.innerWidth() + $lastItem.position().left)) {
+        $('.action.right').addClass('disabled');
+      }
+      //if first item
+      if ($firstItem.position().left === 0) {
+        $('.action.left').addClass('disabled');
+      }
+    }
 
   });
 })(jQuery);

@@ -1,11 +1,16 @@
 //colors
 $brand-primary:                         #ff4838 !default;
 $navbar-default-bg:                     $brand-primary !default;
-$navbar-default-link-color:             #ffffff !default;
+$navbar-default-link-active-color:      #ffffff !default;
+$navbar-default-link-active-bg:         transparent !default;
+$navbar-default-link-color:             #F0F0F0 !default;
 $text-color:                            #585858 !default;
+$link-color:                            $text-color !default;
+$link-hover-color:                      $brand-primary !default;
 $headings-color:                        #000000 !default;
 $about-us-section-bg:                   #f2f2f2 !default;
 
+$nav-link-padding:                      10px 22px !default;
 $navbar-height:                         47px !default;
 $font-family-base:                      'Work Sans' !default;
 $headings-font-family:                  'Roboto Slab' !default;
@@ -20,4 +25,5 @@ $footer-text-color:                       #999999;
 $footer-bg:                               #363636;
 
 //link
+$navbar-default-link-hover-color:        #ffffff !default;
 $link-hover-decoration:                  none !default;

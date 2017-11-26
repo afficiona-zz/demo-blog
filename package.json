@@ -18,7 +18,8 @@
     "jquery": "^3.2.1"
   },
   "devDependencies": {
-    "gulp-html-replace": "^1.6.2"
+    "gulp-html-replace": "^1.6.2",
+    "gulp-rewrite-image-path": "0.0.4"
   },
   "scripts": {
     "test": "mocha"

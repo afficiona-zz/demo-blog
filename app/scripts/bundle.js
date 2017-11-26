@@ -4,11 +4,6 @@
  * Application entry point
  */
 
-// Load application styles
-// ================================
-// START YOUR APP HERE
-// ================================
-
 (function ($) {
   "use strict";
   $(document).ready(function() {
@@ -27,23 +22,49 @@
       $(item).css('left', (index * $(item).innerWidth()));
     });
 
+    _checkIfLastItem();
+
     $('.action').on('click', function() {
-      var isActionTypeLeft = $(this).hasClass('left');
-      $item.each(function () {
+      var $action = $(this);
+      var isActionTypeLeft = $action.hasClass('left');
+      //not allowing navigation if action is disbaled
+      if ($action.hasClass('disabled')) {
+        return;
+      }
+      $item.each(function (index) {
         var offset = 0;
         if (isActionTypeLeft) {
-          offset = $(this).position().left - $item.innerWidth();
-        } else {
           offset = $(this).position().left + $item.innerWidth();
+        } else {
+          offset = $(this).position().left - $item.innerWidth();
         }
-        $(this).animate({'left': offset}, 500);
+        $(this).animate({'left': offset}, 500, function () {
+          _checkIfLastItem()
+        });
 
       });
     });
 
+    //Disbale navigation if first item or last item is visible.
+    function _checkIfLastItem() {
+      var $lastItem = $item.last();
+      var $firstItem = $item.first();
+      // resetting disabled state
+      $('.action').removeClass('disabled');
+
+      // if last item
+      if (Math.floor($wrapper.innerWidth()) === Math.floor($lastItem.innerWidth() + $lastItem.position().left)) {
+        $('.action.right').addClass('disabled');
+      }
+      //if first item
+      if ($firstItem.position().left === 0) {
+        $('.action.left').addClass('disabled');
+      }
+    }
+
   });
 })(jQuery);
-}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_2fc9b823.js","/")
+}).call(this,require("rH1JPG"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_8d3560ad.js","/")
 },{"buffer":3,"rH1JPG":5}],2:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
